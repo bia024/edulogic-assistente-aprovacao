@@ -53,44 +53,35 @@ pytest --cov=main --cov-report=term-missing
 - **[GitHub](https://github.com/bia024/edulogic-assistente-aprovacao)**
 - **[LinkedIn](www.linkedin.com/in/bia-caetano)**
 
-- ## 📊 Fluxograma de Decisão
+# EduLogic - Assistente de Aprovação 🎓
 
-Abaixo, o fluxo lógico implementado no sistema, destacando os caminhos de Aprovação e Recuperação:
+Sistema automatizado para cálculo de situação acadêmica, desenvolvido para o Desafio Profissional (UNIASSELVI).
+
+## Links do Projeto
+- **Deploy Online:** [Clique aqui para testar o sistema](https://edulogic-assistente-aprovacaogit-j8wwktpeyjmfdwc8s9gdqu.streamlit.app/)
+- **Repositório:** [https://github.com/bia024/edulogic-assistente-aprovacao](https://github.com/bia024/edulogic-assistente-aprovacao)
+
+## Fluxograma de Decisão
+O gráfico abaixo representa a lógica de negócio implementada:
 
 ```mermaid
 flowchart TD
-    A["Início: Entrada de Nome, Notas e Frequência"] --> B{"Frequência >= 75%?"}
-    
-    %% Caminho de Reprovação por Frequência
+    A["Início: Entrada de Dados"] --> B{"Frequência >= 75%?"}
     B -- "Não" --> C["Resultado: Reprovado por Frequência"]
-    
-    %% Caminho Principal
     B -- "Sim" --> D{"Média >= 7.0?"}
-    
-    %% Destaque Aprovação (Verde)
     D -- "Sim" --> E(("✅ Resultado: Aprovado"))
-    
-    %% Verificação de Recuperação
     D -- "Não" --> F{"Média >= 5.0?"}
-    
-    %% Destaque Recuperação (Amarelo)
     F -- "Sim" --> G(("⚠️ Resultado: Recuperação"))
-    
-    %% Reprovação por Nota
     F -- "Não" --> H["Resultado: Reprovado por Nota"]
-    
-    %% Finalização
-    C --> I["Fim: Gerar Relatório CSV"]
+    C --> I["Fim: Relatório CSV"]
     E --> I
     G --> I
     H --> I
 
-    %% Estilização e Cores
     classDef aprovado stroke:#22c55e,stroke-width:4px,fill:#f0fdf4;
     classDef recuperacao stroke:#eab308,stroke-width:4px,fill:#fefce8,stroke-dasharray: 5 5;
     classDef reprovado stroke:#ef4444,fill:#fef2f2;
     classDef inicioFim stroke:#6366f1,fill:#eef2ff;
-
     class E aprovado;
     class G recuperacao;
     class C,H reprovado;
